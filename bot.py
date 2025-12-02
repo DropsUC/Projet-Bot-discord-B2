@@ -156,6 +156,17 @@ async def speak_about(interaction: discord.Interaction, sujet: str):
 
 # --- COMMANDES : BONUS & UTILITAIRES ---
 
+@bot.tree.command(name="ban", description="Bannir une personne")
+async def ban(interaction: discord.Interaction, member: discord.Member):
+    # On envoie le MP d'abord
+    await member.send("Tu as été banni du serveur !")
+    
+    # Ensuite, on bannit
+    await member.ban(reason="Tu es méchant !")
+    
+    # Enfin, on confirme dans le chat
+    await interaction.response.send_message("Ban envoyé")
+
 @bot.tree.command(name="dès", description="Lance un dé (1-6)")
 async def dice(interaction: discord.Interaction):
     await interaction.response.send_message(f"🎲 Résultat : **{random.randint(1, 6)}**")
